@@ -1,2 +1,4 @@
 django
-
+psycopg2-binary     #postgress adapter for django, psycopg2-binary don't require a compiler or external libraries, but not prefered in production
+# python-decouple     # To save and restore config files of database from files. Else we can use configparser
+python-dotenv         # Same for the above

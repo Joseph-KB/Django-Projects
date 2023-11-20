@@ -13,6 +13,18 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 
+import os
+
+# Retrive secre_key from a file stored in different location
+from dotenv import load_dotenv
+secret_key_file_path = "/home/kali/JosephKB/Python_Projects/python_django_projects/SecretKeys/.freelancersk.env"
+load_dotenv(secret_key_file_path)
+
+# Assign postgresql password and service file in different location to environment variables
+os.environ["PGSERVICEFILE"] = "/home/kali/JosephKB/Python_Projects/python_django_projects/PostgresqlCredentials/FreelancerProjectDB/.pg_service.conf"
+os.environ["PGPASSFILE"] = "/home/kali/JosephKB/Python_Projects/python_django_projects/PostgresqlCredentials/FreelancerProjectDB/.my_pgpass"
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -20,14 +32,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
+
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n34uag5y)nqt5f7q!f154of&=@!29x!trstlznduq5hqp@yqzy'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    '192.168.1.83', 
+    '192.168.176.83', 
 ]
 
 
@@ -78,14 +91,25 @@ TEMPLATES = [
 WSGI_APPLICATION = 'freelance_arch.wsgi.application'
 
 
-# Databased
+# Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# Database Routers
+#https://docs.djangoproject.com/en/3.2/topics/db/multi-db/#topics-db-multi-db-routing
+
+
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': BASE_DIR / 'db.sqlite3',
+    # }
+    "default": {
+				"ENGINE": "django.db.backends.postgresql",
+				"OPTIONS": {
+					"service": "my_service",
+				},
+			}
+
 }
 
 

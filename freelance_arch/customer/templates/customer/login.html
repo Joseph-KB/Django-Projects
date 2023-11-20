@@ -15,4 +15,17 @@ LoginUser
 <h1>login page</h1>
 
 
+<form action="" method="post" >
+    {% csrf_token %}
+    {{form.as_p }}
+    <input type="submit" value="Submit">
+</form>
+
+{% if message %}
+{{message}}
+{% endif %}
+
+<footer>
+<a href="{% url 'home:home' %}">Home</a>
+</footer>
 {% endblock body %}

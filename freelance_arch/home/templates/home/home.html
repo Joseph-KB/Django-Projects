@@ -19,6 +19,12 @@ FreelancerCO
 
 {% include 'home/navbar.html' %}
 
+{% if messages %}
+    {% for message in messages %}
+        <br>
+        {{message}}
+    {% endfor %}
+{% endif %}
 <br>
 <h1>Don't ignore Your goals</h1>
 
